@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public float gravityModifier;
     public Transform targetPoint;
 
-
     void Start()
     {
         //Cursor.visible = false;

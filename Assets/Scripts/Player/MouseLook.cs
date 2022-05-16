@@ -13,35 +13,45 @@ public class MouseLook : MonoBehaviour
     public float sensitivityVert = 9.0f;
     public float minimumVert = -45.0f;
     public float maximumVert = 45.0f;
-    private float _rotationX = 0;
+
+    [Header("References")]
+    [Tooltip("Reference to the main camera used for the player")]
+    public Camera PlayerCamera;
+
+    [Header("Rotation")]
+    [Tooltip("Rotation speed for moving the camera")]
+    public float RotationSpeed = 200f;
+
+    float m_CameraVerticalAngle = 0f;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Rigidbody body = GetComponent<Rigidbody>();
-        if (body != null)
-            body.freezeRotation = true;
+        //Rigidbody body = GetComponent<Rigidbody>();
+        //if (body != null)
+        //    body.freezeRotation = true;
     }
     void Update()
     {
-        if (axes == RotationAxes.MouseX)
+        // horizontal character rotation
         {
-            transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityHor, 0);
+            // rotate the transform with the input speed around its local Y axis
+            transform.Rotate(
+                new Vector3(0f, (Input.GetAxis("Mouse X") * RotationSpeed),
+                    0f), Space.Self);
         }
-        else if (axes == RotationAxes.MouseY)
+
+        // vertical camera rotation
         {
-            _rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
-            _rotationX = Mathf.Clamp(_rotationX, minimumVert, maximumVert);
-            float rotationY = transform.localEulerAngles.y;
-            transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
-        }
-        else
-        {
-            _rotationX -= Input.GetAxis("Mouse Y") * sensitivityVert;
-            _rotationX = Mathf.Clamp(_rotationX, minimumVert, maximumVert);
-            float delta = Input.GetAxis("Mouse X") * sensitivityHor;
-            float rotationY = transform.localEulerAngles.y + delta;
-            transform.localEulerAngles = new Vector3(_rotationX, rotationY, 0);
+            // add vertical inputs to the camera's vertical angle
+            m_CameraVerticalAngle += Input.GetAxis("Mouse Y") * RotationSpeed * (-1f);  
+
+            // limit the camera's vertical angle to min/max
+            m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
+
+            // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
+            PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
         }
     }
 }
