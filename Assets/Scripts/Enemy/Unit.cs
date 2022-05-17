@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
+    [SerializeField] public Transform _target;
     [SerializeField] private ConfigurableJoint _joint;
     [SerializeField] private Transform _pelvisTransform;
 

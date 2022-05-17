@@ -17,6 +17,9 @@ public class PhysicalBodyPart : MonoBehaviour
 
     void FixedUpdate()
     {
-        _joint.targetRotation = Quaternion.Inverse(_target.localRotation) * _startRotation;
+        if(_joint)
+        {
+            _joint.targetRotation = Quaternion.Inverse(_target.localRotation) * _startRotation;
+        }
     }
 }

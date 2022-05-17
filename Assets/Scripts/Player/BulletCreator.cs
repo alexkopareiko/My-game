@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class BulletCreator : MonoBehaviour
 {
+    [Tooltip("Bullet prefab")]
     public GameObject BulletPrefab;
+
+    [Tooltip("Speed of bullet")]
     public float BulletVelocity = 30f;
 
     [Tooltip("Where the gun needs to be aimed")]
     public Transform Aim;
 
-    private void Update()
+    private void Start()
     {
         transform.LookAt(Aim);
+    }
+
+    private void Update()
+    {
+        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
         ray.origin = transform.position;
         ray.direction = transform.forward;
