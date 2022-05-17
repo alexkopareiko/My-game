@@ -82,6 +82,6 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
-        audioSource.PlayOneShot(dieSound, 1.0f);
+        gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(dieSound, 1.0f);
     }
 }
