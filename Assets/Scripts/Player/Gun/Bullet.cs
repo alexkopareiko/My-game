@@ -26,15 +26,11 @@ public class Bullet : MonoBehaviour
 
         GetComponent<Rigidbody>().useGravity = true;
 
-        if(GameHelpers.FindParentWithTag(collision.gameObject, "Enemy"))
+        Enemy enemy = collision.gameObject.GetComponentInParent(typeof(Enemy)) as Enemy;
+        if (enemy)
         {
-            //Debug.Log(collision.gameObject.name);
-
-            ConfigurableJoint enemyCJ = collision.gameObject.GetComponent<ConfigurableJoint>();
-            PhysicalBodyPart enemyPBP = collision.gameObject.GetComponent<PhysicalBodyPart>();
-
-            Destroy(enemyPBP);
-            Destroy(enemyCJ);
+            int enemyHealth = enemy.HitEnemy(collision.gameObject);
+            Debug.Log("enemyHealth " + enemyHealth);
         }
 
     }

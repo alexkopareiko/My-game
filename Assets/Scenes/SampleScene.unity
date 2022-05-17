@@ -1089,6 +1089,7 @@ MonoBehaviour:
   xRange: 10
   zRange: 10
   enemyCount: 1
+  newLevelSound: {fileID: 8300000, guid: 3e82064a15504be4f820fc8e5c123a26, type: 3}
 --- !u!4 &1372570899
 Transform:
   m_ObjectHideFlags: 0
@@ -1157,14 +1158,6 @@ PrefabInstance:
     - target: {fileID: 4555194103437276655, guid: 5a20b2fb21def98478dfe659e34cbffe, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555194103437276655, guid: 5a20b2fb21def98478dfe659e34cbffe, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555194104515230855, guid: 5a20b2fb21def98478dfe659e34cbffe, type: 3}
-      propertyPath: BulletVelocity
-      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a20b2fb21def98478dfe659e34cbffe, type: 3}

@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    [Tooltip("Target for folowing (player)")]
     [SerializeField] public Transform _target;
+
+    [Tooltip("Connection with Animated part")]
     [SerializeField] private ConfigurableJoint _joint;
+
+    [Tooltip("Current transform")]
     [SerializeField] private Transform _pelvisTransform;
 
     private void FixedUpdate()

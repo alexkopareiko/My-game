@@ -16,6 +16,9 @@ public class SpawnManager : MonoBehaviour
     [Tooltip("Initial count of enemies")]
     public int enemyCount = 1;
 
+    [Tooltip("Sound of New Level")]
+    public AudioClip newLevelSound;
+
     GameManager gameManager;
 
     // Start is called before the first frame update
@@ -23,6 +26,16 @@ public class SpawnManager : MonoBehaviour
     {
         gameManager = GameManager.instance;
         SpawnEnemies(enemyCount);  
+    }
+
+    private void Update()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if(enemies.Length == 0)
+        {
+            SpawnEnemies(++enemyCount);
+            gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(newLevelSound, 1.0f);
+        }
     }
 
     // Spawn Enemies
