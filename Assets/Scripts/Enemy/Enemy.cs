@@ -63,8 +63,6 @@ public class Enemy : MonoBehaviour
 
         if (enemyCJ && enemyPBP)
         {
-            
-            Debug.Log("enemyCJ and enemyPBP found");
             Destroy(enemyPBP);
             Destroy(enemyCJ);
 

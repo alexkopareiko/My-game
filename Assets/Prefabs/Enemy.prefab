@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb2f5d1c25e66c4a84aa1f4e7994b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 0
   bulletHittingSound: {fileID: 8300000, guid: 92d8ef4ae94c78849b2caa1b3a46112a, type: 3}
   headshotSound: {fileID: 8300000, guid: 66a36f166fe0d96448ac39f1c0f51c5d, type: 3}
   dieSound: {fileID: 8300000, guid: 2a7d7391ad62cad4aa1b4f10c4e1a4fb, type: 3}
+  _health: 0
 --- !u!82 &4478764392291292805
 AudioSource:
   m_ObjectHideFlags: 0

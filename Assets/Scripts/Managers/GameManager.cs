@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Player")]
     public GameObject player;
+    
+    [Tooltip("Canvas")]
+    public Canvas _canvas;
 
 
     // Start is called before the first frame update

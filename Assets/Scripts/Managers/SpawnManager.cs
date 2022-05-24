@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+
+    #region Singleton
+    public static SpawnManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
+
     [Tooltip("Enemy prefab to spawn")]
     public GameObject enemyPrefab;
+    
+    [Tooltip("Pointer Icon Prefab (red triangle)")]
+    public GameObject pointerIconPrefab;
     
     [Tooltip("Range X for enemy spawning")]
     public float xRange = 5f;
@@ -22,7 +34,7 @@ public class SpawnManager : MonoBehaviour
     GameManager gameManager;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         gameManager = GameManager.instance;
         SpawnEnemies(enemyCount);  
