@@ -29,15 +29,22 @@ public class BulletCreator : MonoBehaviour
     [Tooltip("ShotRecoil")]
     private float shotRecoil = 1000f;
 
+    GameManager gameManager;
+    FPSInput fpsInput;
+
     private void Start()
     {
-        transform.LookAt(Aim);
         audioSource = GetComponent<AudioSource>();
+        gameManager = GameManager.instance;
+        fpsInput = gameManager.player.GetComponent<FPSInput>();
     }
 
     private void Update()
     {
-        
+
+        FixGunBlockInTheAir();
+
+        transform.LookAt(Aim);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
         ray.origin = transform.position;
         ray.direction = transform.forward;
@@ -49,10 +56,22 @@ public class BulletCreator : MonoBehaviour
             audioSource.PlayOneShot(shootSound, 1.0f);
 
             gunBlockRb.AddRelativeForce(0f, 0f, -shotRecoil, ForceMode.Force);
-            //gunBlockRb.AddForce(gunBlockRb.gameObject.transform.forward * 50000f, ForceMode.Impulse);
-            //gunBlockRb.AddForce(transform.right * 2000f, ForceMode.Impulse);
-            //gunBlockRb.AddForce(gunBlockRb.gameObject.transform.forward * 10000f, ForceMode.Impulse);
         }
 
+
+    }
+
+    // to prevent gunBlock jerking in the air while pressing move buttons
+    private void FixGunBlockInTheAir()
+    {
+        bool isGrounded = fpsInput.IsGrounded;
+        if (!isGrounded)
+        {
+            gunBlockRb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        else
+        {
+            gunBlockRb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        }
     }
 }

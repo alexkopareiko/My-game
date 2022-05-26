@@ -27,7 +27,7 @@ public class EnemyPointer : MonoBehaviour
         Transform playerTransform = gameManager.player.GetComponentInChildren<BulletCreator>().gunBlockRb.gameObject.transform;
         Vector3 fromPlayerToEnemy = transform.position - playerTransform.position;
         Ray ray = new Ray(playerTransform.position, fromPlayerToEnemy);
-        Debug.DrawRay(playerTransform.position, fromPlayerToEnemy, Color.cyan);
+        //Debug.DrawRay(playerTransform.position, fromPlayerToEnemy, Color.cyan);
 
         // [0] = Left, [1] = Right, [2] = Down, [3] = Up, [4] = Near, [5] = Far
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_camera); 
