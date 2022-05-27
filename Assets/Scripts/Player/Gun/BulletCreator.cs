@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(AudioSource))]
 public class BulletCreator : MonoBehaviour
@@ -22,6 +23,16 @@ public class BulletCreator : MonoBehaviour
 
     [Tooltip("Sound of shooting")]
     public AudioClip shootSound;
+    
+    [Tooltip("Sound of empty shooting")]
+    public AudioClip emptyShootSound;
+    
+    [Tooltip("TextMPro for bullet amount")]
+    [SerializeField] private TMP_Text textBulletAmount;
+    
+    [Tooltip("Bullet Amount")] 
+    [SerializeField] private int bulletAmount = 10;
+
 
     [Tooltip("Audio Source for Gun")]
     private AudioSource audioSource;
@@ -37,6 +48,7 @@ public class BulletCreator : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         gameManager = GameManager.instance;
         fpsInput = gameManager.player.GetComponent<FPSInput>();
+        textBulletAmount.text = bulletAmount.ToString();
     }
 
     private void Update()
@@ -51,11 +63,19 @@ public class BulletCreator : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject newBullet = Instantiate(BulletPrefab, SourceOfBullets.position, SourceOfBullets.rotation);
-            newBullet.GetComponent<Rigidbody>().velocity = transform.forward * BulletVelocity;
-            audioSource.PlayOneShot(shootSound, 1.0f);
+            if(bulletAmount > 0)
+            {
+                GameObject newBullet = Instantiate(BulletPrefab, SourceOfBullets.position, SourceOfBullets.rotation);
+                newBullet.GetComponent<Rigidbody>().velocity = transform.forward * BulletVelocity;
+                audioSource.PlayOneShot(shootSound, 1.0f);
+                gunBlockRb.AddRelativeForce(0f, 0f, -shotRecoil, ForceMode.Force);
+                bulletAmount--;
+                textBulletAmount.text = bulletAmount.ToString();
+            } else
+            {
+                audioSource.PlayOneShot(emptyShootSound, 1.0f);
+            }
 
-            gunBlockRb.AddRelativeForce(0f, 0f, -shotRecoil, ForceMode.Force);
         }
 
 

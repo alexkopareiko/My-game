@@ -55,8 +55,8 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < quantity; i++)
         {
-            float x = Random.Range(-xRange, xRange);
-            float z = Random.Range(-zRange, zRange);
+            float x = transform.position.x + Random.Range(-xRange, xRange);
+            float z = transform.position.z + Random.Range(-zRange, zRange); 
 
             Vector3 enemyPosition = new Vector3(x, transform.position.y, z);
             // spawn enemy couple of animated and physical parts
