@@ -13,6 +13,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float health = 10;
 
+    [Tooltip("Sound of heal")]
+    public AudioClip healSound;
+
+    [Tooltip("Sound of game over")]
+    public AudioClip gameoverSound;
+
     private float maxHealth;
 
     void Start()
@@ -33,7 +39,16 @@ public class Player : MonoBehaviour
 
     void Die()
     {
+        audioSource.PlayOneShot(gameoverSound, 1.0f);
         Debug.Log("Game over");
+    }
+
+    public float Heal() {
+        health = maxHealth;
+        healthBar.SetHealth(Mathf.Clamp(health, 0, maxHealth));
+        Debug.Log("Player was healed");
+        audioSource.PlayOneShot(healSound, 1.0f);
+        return health;
     }
 
 }

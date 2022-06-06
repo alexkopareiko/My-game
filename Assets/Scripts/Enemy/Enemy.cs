@@ -25,6 +25,9 @@ public class Enemy : MonoBehaviour
     [Tooltip("Delay between atacks (seconds)")]
     public float attackDelay = 1;
 
+    [Tooltip("Diamond Prefab")]
+    public GameObject diamondPrefab;
+
     [Tooltip("Has attacked")]
     private bool hasAttacked = false;
 
@@ -103,6 +106,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+        Instantiate(diamondPrefab, physicalBodyParts.transform.position + Vector3.up * 2, diamondPrefab.transform.rotation);
         gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(dieSound, 1.0f);
     }
 

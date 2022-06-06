@@ -52,6 +52,7 @@ MonoBehaviour:
   attackRadius: 2
   powerOfDamage: 3
   attackDelay: 1
+  diamondPrefab: {fileID: 1534198852272200393, guid: 9c0c5e7e49eb7ec47b463379f8a7f091, type: 3}
   _health: 0
 --- !u!1001 &3936128500000935518
 PrefabInstance:

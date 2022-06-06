@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class SpawnManager : MonoBehaviour
     [Tooltip("Sound of New Level")]
     public AudioClip newLevelSound;
 
+    [Tooltip("Text for level")]
+    public Text levelText;
+
+    
+
     GameManager gameManager;
 
     // Start is called before the first frame update
@@ -38,6 +44,7 @@ public class SpawnManager : MonoBehaviour
     {
         gameManager = GameManager.instance;
         SpawnEnemies(enemyCount);  
+        levelText.text = "Level: " + enemyCount;
     }
 
     private void Update()
@@ -47,6 +54,7 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnEnemies(++enemyCount);
             gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(newLevelSound, 1.0f);
+            levelText.text = "Level: " + enemyCount;
         }
     }
 

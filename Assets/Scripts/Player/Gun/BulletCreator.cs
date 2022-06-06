@@ -23,9 +23,15 @@ public class BulletCreator : MonoBehaviour
 
     [Tooltip("Sound of shooting")]
     public AudioClip shootSound;
-    
+
+    [Tooltip("Sound of recharge")]
+    public AudioClip rechargeSound;
+   
     [Tooltip("Sound of empty shooting")]
     public AudioClip emptyShootSound;
+
+    [SerializeField] public int maxBulletAmount;
+
     
     [Tooltip("TextMPro for bullet amount")]
     [SerializeField] private TMP_Text textBulletAmount;
@@ -49,6 +55,7 @@ public class BulletCreator : MonoBehaviour
         gameManager = GameManager.instance;
         fpsInput = gameManager.player.GetComponent<FPSInput>();
         textBulletAmount.text = bulletAmount.ToString();
+        maxBulletAmount = bulletAmount;
     }
 
     private void Update()
@@ -93,5 +100,11 @@ public class BulletCreator : MonoBehaviour
         {
             gunBlockRb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         }
+    }
+
+    public void GunRecharge() {
+        bulletAmount += maxBulletAmount;
+        textBulletAmount.text = bulletAmount.ToString();
+        audioSource.PlayOneShot(rechargeSound, 1.0f);
     }
 }
