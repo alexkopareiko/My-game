@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
     public float Heal() {
         health = maxHealth;
+        healthBar.GetComponent<Animator>().SetTrigger("heart_bit");
         healthBar.SetHealth(Mathf.Clamp(health, 0, maxHealth));
         Debug.Log("Player was healed");
         audioSource.PlayOneShot(healSound, 1.0f);

@@ -106,5 +106,6 @@ public class BulletCreator : MonoBehaviour
         bulletAmount += maxBulletAmount;
         textBulletAmount.text = bulletAmount.ToString();
         audioSource.PlayOneShot(rechargeSound, 1.0f);
+        textBulletAmount.GetComponentInParent<Animator>().SetTrigger("patron_bit");
     }
 }
