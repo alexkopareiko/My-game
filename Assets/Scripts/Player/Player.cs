@@ -39,7 +39,8 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        audioSource.PlayOneShot(gameoverSound, 1.0f);
+        if(PlayerPrefs.GetInt("sound") == 1)
+            audioSource.PlayOneShot(gameoverSound, 1.0f);
         Debug.Log("Game over");
     }
 
@@ -48,7 +49,8 @@ public class Player : MonoBehaviour
         healthBar.GetComponent<Animator>().SetTrigger("heart_bit");
         healthBar.SetHealth(Mathf.Clamp(health, 0, maxHealth));
         Debug.Log("Player was healed");
-        audioSource.PlayOneShot(healSound, 1.0f);
+        if(PlayerPrefs.GetInt("sound") == 1)
+            audioSource.PlayOneShot(healSound, 1.0f);
         return health;
     }
 

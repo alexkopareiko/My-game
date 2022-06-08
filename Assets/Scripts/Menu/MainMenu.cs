@@ -15,12 +15,14 @@ public class MainMenu : MonoBehaviour
     public Sprite soundButtonSpriteOff;
 
     public AudioClip soundTheme;
-
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     private void Start() {
         sound = PlayerPrefs.GetInt("sound");
+        Debug.Log(sound);
         SetSoundImage();
+        if(sound == 1) audioSource.Play();
+        else if(sound == 0) audioSource.Pause();
     }
 
     public void PlayGame() {
@@ -34,9 +36,11 @@ public class MainMenu : MonoBehaviour
     public void TriggerSound() {
         if(sound == 0) {
             sound = 1;
+            audioSource.Play();
         }
         else if(sound == 1) {
             sound = 0;
+            audioSource.Pause();
         }
         PlayerPrefs.SetInt("sound", sound);
         SetSoundImage();

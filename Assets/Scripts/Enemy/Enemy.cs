@@ -33,8 +33,8 @@ public class Enemy : MonoBehaviour
 
     private GameManager gameManager;
 
-    [Tooltip("[PRIVATE] How many parts with ConfigurableJoint enemy has")]
-    [SerializeField] private int _health;
+    [Tooltip("How many parts with ConfigurableJoint enemy has")]
+    private int _health;
 
     [Tooltip("Audio Source Enemy")]
     private AudioSource audioSource;
@@ -56,6 +56,12 @@ public class Enemy : MonoBehaviour
         // find all Configurable Joint components
         ConfigurableJoint[] CJcomponents = physicalBodyParts.gameObject.GetComponentsInChildren<ConfigurableJoint>();
         _health = CJcomponents.Length;
+
+        // set speed of enemy (likewise of animator)
+        float enemyCount = SpawnManager.instance.enemyCount;
+        float speedOfAnimations = Random.Range(0.5f, enemyCount * 0.8f);
+        animatedBodyParts.GetComponent<Animator>().speed = speedOfAnimations;
+        attackDelay /= speedOfAnimations;
     }
 
  
@@ -80,11 +86,13 @@ public class Enemy : MonoBehaviour
 
         if (block.GetComponent<Head>() && enemyCJ && enemyPBP)
         {
-            gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(headshotSound, 1.0f);
+            if(PlayerPrefs.GetInt("sound") == 1)
+                gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(headshotSound, 1.0f);
         }
         else
         {
-            audioSource.PlayOneShot(bulletHittingSound, 1.0f);
+            if(PlayerPrefs.GetInt("sound") == 1)
+                audioSource.PlayOneShot(bulletHittingSound, 1.0f);
         }
 
         if (enemyCJ && enemyPBP)
@@ -107,7 +115,8 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
         Instantiate(diamondPrefab, physicalBodyParts.transform.position + Vector3.up * 2, diamondPrefab.transform.rotation);
-        gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(dieSound, 1.0f);
+        if(PlayerPrefs.GetInt("sound") == 1)
+            gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(dieSound, 1.0f);
     }
 
     // check for attack
@@ -137,7 +146,8 @@ public class Enemy : MonoBehaviour
         if (distance <= attackRadius)
         {
             player.GetComponent<Player>().hitPlayer(powerOfDamage);
-            audioSource.PlayOneShot(attackSound, 1.0f);
+            if(PlayerPrefs.GetInt("sound") == 1)
+                audioSource.PlayOneShot(attackSound, 1.0f);
 
         }
         hasAttacked = false;

@@ -53,7 +53,8 @@ public class SpawnManager : MonoBehaviour
         if(enemies.Length == 0)
         {
             SpawnEnemies(++enemyCount);
-            gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(newLevelSound, 1.0f);
+            if(PlayerPrefs.GetInt("sound") == 1)
+                gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(newLevelSound, 1.0f);
             levelText.text = "Level: " + enemyCount;
         }
     }

@@ -74,13 +74,15 @@ public class BulletCreator : MonoBehaviour
             {
                 GameObject newBullet = Instantiate(BulletPrefab, SourceOfBullets.position, SourceOfBullets.rotation);
                 newBullet.GetComponent<Rigidbody>().velocity = transform.forward * BulletVelocity;
-                audioSource.PlayOneShot(shootSound, 1.0f);
+                if(PlayerPrefs.GetInt("sound") == 1)
+                    audioSource.PlayOneShot(shootSound, 1.0f);
                 gunBlockRb.AddRelativeForce(0f, 0f, -shotRecoil, ForceMode.Force);
                 bulletAmount--;
                 textBulletAmount.text = bulletAmount.ToString();
             } else
             {
-                audioSource.PlayOneShot(emptyShootSound, 1.0f);
+                if(PlayerPrefs.GetInt("sound") == 1)
+                    audioSource.PlayOneShot(emptyShootSound, 1.0f);
             }
 
         }
@@ -105,7 +107,8 @@ public class BulletCreator : MonoBehaviour
     public void GunRecharge() {
         bulletAmount += maxBulletAmount;
         textBulletAmount.text = bulletAmount.ToString();
-        audioSource.PlayOneShot(rechargeSound, 1.0f);
+        if(PlayerPrefs.GetInt("sound") == 1)
+            audioSource.PlayOneShot(rechargeSound, 1.0f);
         textBulletAmount.GetComponentInParent<Animator>().SetTrigger("patron_bit");
     }
 }
