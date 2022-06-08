@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
         if(PlayerPrefs.GetInt("sound") == 1)
             audioSource.PlayOneShot(gameoverSound, 1.0f);
         Debug.Log("Game over");
+        GameManager.instance.GameOver();
     }
 
     public float Heal() {

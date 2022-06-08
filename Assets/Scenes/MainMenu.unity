@@ -1232,6 +1232,7 @@ GameObject:
   - component: {fileID: 1399973863}
   - component: {fileID: 1399973864}
   - component: {fileID: 1399973865}
+  - component: {fileID: 1399973866}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1294,6 +1295,25 @@ MonoBehaviour:
   pointer: {fileID: 2800000, guid: 4fe6f335350b5d74c9ae53f216611f13, type: 3}
   menuButtonPressed: {fileID: 8300000, guid: 7c893f399e4a701438503029a22fd837, type: 3}
   menuButtonHover: {fileID: 8300000, guid: a0eb20fa5232d1e4daf1356aa936af77, type: 3}
+--- !u!95 &1399973866
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399973862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 65d08c276b041c2469271e454218c902, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1800522085
 GameObject:
   m_ObjectHideFlags: 0

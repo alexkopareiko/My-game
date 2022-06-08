@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     [Tooltip("menu when pressed ESC")]
     public GameObject pauseMenu;
 
+    [Tooltip("GameOver menu from canvas")]
+
+    public GameObject gameOverPanel;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,5 +58,9 @@ public class GameManager : MonoBehaviour
             pauseMenu.SetActive(false);
             Cursor.visible = false;
         }
+    }
+
+    public void GameOver() {
+        gameOverPanel.SetActive(true);
     }
 }
