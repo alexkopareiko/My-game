@@ -30,7 +30,7 @@ public class BulletCreator : MonoBehaviour
     [Tooltip("Sound of empty shooting")]
     public AudioClip emptyShootSound;
 
-    [SerializeField] public int maxBulletAmount;
+    public int maxBulletAmount;
 
     
     [Tooltip("TextMPro for bullet amount")]
@@ -60,7 +60,6 @@ public class BulletCreator : MonoBehaviour
 
     private void Update()
     {
-
         FixGunBlockInTheAir();
 
         transform.LookAt(Aim);
@@ -68,6 +67,12 @@ public class BulletCreator : MonoBehaviour
         ray.origin = transform.position;
         ray.direction = transform.forward;
 
+        if(!GameManager.gameIsPaused) {
+            Shoot();
+        }
+    }
+
+    void Shoot() {
         if (Input.GetMouseButtonDown(0))
         {
             if(bulletAmount > 0)
@@ -86,8 +91,6 @@ public class BulletCreator : MonoBehaviour
             }
 
         }
-
-
     }
 
     // to prevent gunBlock jerking in the air while pressing move buttons
@@ -110,5 +113,6 @@ public class BulletCreator : MonoBehaviour
         if(PlayerPrefs.GetInt("sound") == 1)
             audioSource.PlayOneShot(rechargeSound, 1.0f);
         textBulletAmount.GetComponentInParent<Animator>().SetTrigger("patron_bit");
+        GetComponent<Animator>().SetTrigger("gun_recharge");
     }
 }

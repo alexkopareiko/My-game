@@ -21,12 +21,23 @@ public class MainMenu : MonoBehaviour
         sound = PlayerPrefs.GetInt("sound");
         Debug.Log(sound);
         SetSoundImage();
-        if(sound == 1) audioSource.Play();
-        else if(sound == 0) audioSource.Pause();
+        if(sound == 1 && audioSource) audioSource.Play();
+        else if(sound == 0 && audioSource) audioSource.Pause();
     }
 
     public void PlayGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.gameIsPaused = false;
+        GameManager.instance.PauseGame();
+    }
+
+    public void ResumeGame() {
+        GameManager.gameIsPaused = false;
+        GameManager.instance.PauseGame();
+    }
+
+    public void EnterMainMenu() {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame() {

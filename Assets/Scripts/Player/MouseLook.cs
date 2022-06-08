@@ -25,6 +25,12 @@ public class MouseLook : MonoBehaviour
     }
     void Update()
     {
+        if(!GameManager.gameIsPaused) {
+            MouseLookFunc();
+        }
+    }
+
+    void MouseLookFunc() {
         // horizontal character rotation
         {
             // rotate the transform with the input speed around its local Y axis

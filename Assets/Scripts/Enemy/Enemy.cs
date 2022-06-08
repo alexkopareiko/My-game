@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
         _health = CJcomponents.Length;
 
         // set speed of enemy (likewise of animator)
-        float enemyCount = SpawnManager.instance.enemyCount;
+        float enemyCount = Mathf.Clamp(SpawnManager.instance.enemyCount, 1, 7);
         float speedOfAnimations = Random.Range(0.5f, enemyCount * 0.8f);
         animatedBodyParts.GetComponent<Animator>().speed = speedOfAnimations;
         attackDelay /= speedOfAnimations;

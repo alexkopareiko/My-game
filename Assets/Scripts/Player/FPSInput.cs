@@ -49,10 +49,12 @@ public class FPSInput : MonoBehaviour
     }
     void Update()
     {
-        HasJumpedThisFrame = false;
+        if(!GameManager.gameIsPaused) {
+            HasJumpedThisFrame = false;
 
-        GroundCheck();
-        Move();
+            GroundCheck();
+            Move();
+        }
     }
 
     private void Move()
