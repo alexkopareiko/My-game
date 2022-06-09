@@ -88,6 +88,7 @@ public class Enemy : MonoBehaviour
         {
             if(PlayerPrefs.GetInt("sound") == 1)
                 gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(headshotSound, 1.0f);
+                Die();
         }
         else
         {

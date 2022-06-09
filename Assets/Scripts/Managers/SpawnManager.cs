@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -33,9 +33,7 @@ public class SpawnManager : MonoBehaviour
     public AudioClip newLevelSound;
 
     [Tooltip("Text for level")]
-    public Text levelText;
-
-    
+    public TMP_Text levelText;
 
     GameManager gameManager;
 
@@ -44,18 +42,25 @@ public class SpawnManager : MonoBehaviour
     {
         gameManager = GameManager.instance;
         SpawnEnemies(enemyCount);  
-        levelText.text = "Level: " + enemyCount;
+        levelText.text = enemyCount.ToString();
+        levelText.GetComponentInParent<Animator>().SetTrigger("new_level");
+
     }
 
     private void Update()
     {
+
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if(enemies.Length == 0)
         {
             SpawnEnemies(++enemyCount);
+            int max_score = PlayerPrefs.GetInt("max_score");
+            if(max_score < enemyCount && enemyCount - max_score == 1) 
+                PlayerPrefs.SetInt("max_score", enemyCount);
             if(PlayerPrefs.GetInt("sound") == 1)
                 gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(newLevelSound, 1.0f);
-            levelText.text = "Level: " + enemyCount;
+            levelText.text = enemyCount.ToString();
+            levelText.GetComponentInParent<Animator>().SetTrigger("new_level");
         }
     }
 

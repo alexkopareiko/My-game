@@ -27,8 +27,6 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        GameManager.gameIsPaused = false;
-        GameManager.instance.PauseGame();
     }
 
     public void ResumeGame() {
@@ -37,6 +35,8 @@ public class MainMenu : MonoBehaviour
     }
 
     public void EnterMainMenu() {
+        GameManager.gameIsPaused = false;
+        GameManager.instance.PauseGame(false);
         SceneManager.LoadScene("MainMenu");
     }
 

@@ -43,8 +43,13 @@ public class BulletCreator : MonoBehaviour
     [Tooltip("Audio Source for Gun")]
     private AudioSource audioSource;
 
-    [Tooltip("ShotRecoil")]
-    private float shotRecoil = 1000f;
+    [Tooltip("ShootRecoil (otdacha ot udara)")]
+    private float shootRecoil = 1000f;
+
+    [Tooltip("Time interval between shooting")]
+    private float shootInterval = 0.2f;
+    private float timeElapse = 0f;
+
 
     GameManager gameManager;
     FPSInput fpsInput;
@@ -73,15 +78,17 @@ public class BulletCreator : MonoBehaviour
     }
 
     void Shoot() {
-        if (Input.GetMouseButtonDown(0))
+        timeElapse += Time.deltaTime;
+        if (Input.GetMouseButton(0) && timeElapse > shootInterval)
         {
+            timeElapse = 0;
             if(bulletAmount > 0)
             {
                 GameObject newBullet = Instantiate(BulletPrefab, SourceOfBullets.position, SourceOfBullets.rotation);
                 newBullet.GetComponent<Rigidbody>().velocity = transform.forward * BulletVelocity;
                 if(PlayerPrefs.GetInt("sound") == 1)
                     audioSource.PlayOneShot(shootSound, 1.0f);
-                gunBlockRb.AddRelativeForce(0f, 0f, -shotRecoil, ForceMode.Force);
+                gunBlockRb.AddRelativeForce(0f, 0f, -shootRecoil, ForceMode.Force);
                 bulletAmount--;
                 textBulletAmount.text = bulletAmount.ToString();
             } else

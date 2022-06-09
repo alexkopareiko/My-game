@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,14 +24,10 @@ public class GameManager : MonoBehaviour
     [Tooltip("menu when pressed ESC")]
     public GameObject pauseMenu;
 
-    [Tooltip("GameOver menu from canvas")]
-
-    public GameObject gameOverPanel;
-
-
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -43,24 +40,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PauseGame ()
+    public void PauseGame (bool needTriggerPauseMenu = true)
     {
         if(gameIsPaused)
         {
             Time.timeScale = 0f;
-            pauseMenu.SetActive(true);
+            if(needTriggerPauseMenu) pauseMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
         else 
         {
             Time.timeScale = 1;
-            pauseMenu.SetActive(false);
+            if(needTriggerPauseMenu) pauseMenu.SetActive(false);
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
     public void GameOver() {
-        gameOverPanel.SetActive(true);
+        SceneManager.LoadScene("GameOver");
+
     }
 }

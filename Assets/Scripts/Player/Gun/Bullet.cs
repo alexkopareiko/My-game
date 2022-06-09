@@ -36,7 +36,6 @@ public class Bullet : MonoBehaviour
     }
 
 
-
     IEnumerator DestroyBullet(float delay)
     {
         yield return new WaitForSeconds(delay);

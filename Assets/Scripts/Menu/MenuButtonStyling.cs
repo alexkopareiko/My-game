@@ -13,6 +13,8 @@ public class MenuButtonStyling : MonoBehaviour
     private void Start() {
         audioSource = Camera.main.GetComponent<AudioSource>();
         Cursor.SetCursor (pointer, Vector2.zero, CursorMode.Auto);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void OnMouseOver()

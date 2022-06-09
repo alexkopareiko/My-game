@@ -16,9 +16,6 @@ public class Player : MonoBehaviour
     [Tooltip("Sound of heal")]
     public AudioClip healSound;
 
-    [Tooltip("Sound of game over")]
-    public AudioClip gameoverSound;
-
     private float maxHealth;
 
     void Start()
@@ -39,8 +36,7 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        if(PlayerPrefs.GetInt("sound") == 1)
-            audioSource.PlayOneShot(gameoverSound, 1.0f);
+
         Debug.Log("Game over");
         GameManager.instance.GameOver();
     }
