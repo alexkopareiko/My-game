@@ -30,7 +30,6 @@ public class Bullet : MonoBehaviour
         if (enemy)
         {
             int enemyHealth = enemy.HitEnemy(collision.gameObject);
-            //Debug.Log("enemyHealth " + enemyHealth);
         }
 
     }

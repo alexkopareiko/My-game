@@ -30,14 +30,11 @@ public class Player : MonoBehaviour
         health -= damage;
         if (health <= 0) Die();
         healthBar.SetHealth(Mathf.Clamp(health, 0, maxHealth));
-        Debug.Log("Player was hurt");
         return health;
     }
 
     void Die()
     {
-
-        Debug.Log("Game over");
         GameManager.instance.GameOver();
     }
 
@@ -45,7 +42,6 @@ public class Player : MonoBehaviour
         health = maxHealth;
         healthBar.GetComponent<Animator>().SetTrigger("heart_bit");
         healthBar.SetHealth(Mathf.Clamp(health, 0, maxHealth));
-        Debug.Log("Player was healed");
         if(PlayerPrefs.GetInt("sound") == 1)
             audioSource.PlayOneShot(healSound, 1.0f);
         return health;

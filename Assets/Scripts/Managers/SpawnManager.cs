@@ -40,11 +40,11 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyCount = PlayerPrefs.GetInt("level_to_load");
         gameManager = GameManager.instance;
         SpawnEnemies(enemyCount);  
         levelText.text = enemyCount.ToString();
         levelText.GetComponentInParent<Animator>().SetTrigger("new_level");
-
     }
 
     private void Update()

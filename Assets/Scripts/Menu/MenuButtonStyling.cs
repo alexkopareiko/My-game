@@ -33,5 +33,6 @@ public class MenuButtonStyling : MonoBehaviour
     }
     public void onMouseUp(GameObject gO) {
         gO.GetComponent<RectTransform>().localScale *= 1.25f;
-    }   
+    } 
+ 
 }

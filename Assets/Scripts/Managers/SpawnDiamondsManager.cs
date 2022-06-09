@@ -27,7 +27,6 @@ public class SpawnDiamondsManager : MonoBehaviour
                 isDiamondNear = true;
             }
         }
-
         if (Time.time > nextActionTime && !isDiamondNear) {
             nextActionTime += period;
             Instantiate(diamondPrefab, transform.position, diamondPrefab.transform.rotation);

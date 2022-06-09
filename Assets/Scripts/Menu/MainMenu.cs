@@ -19,7 +19,6 @@ public class MainMenu : MonoBehaviour
 
     private void Start() {
         sound = PlayerPrefs.GetInt("sound");
-        Debug.Log(sound);
         SetSoundImage();
         if(sound == 1 && audioSource) audioSource.Play();
         else if(sound == 0 && audioSource) audioSource.Pause();
