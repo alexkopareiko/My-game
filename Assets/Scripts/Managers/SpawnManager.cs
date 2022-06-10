@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyCount = PlayerPrefs.GetInt("level_to_load");
+        enemyCount = PlayerPrefs.GetInt("levelToLoad");
         gameManager = GameManager.instance;
         SpawnEnemies(enemyCount);  
         levelText.text = enemyCount.ToString();
@@ -54,9 +54,11 @@ public class SpawnManager : MonoBehaviour
         if(enemies.Length == 0)
         {
             SpawnEnemies(++enemyCount);
-            int max_score = PlayerPrefs.GetInt("max_score");
-            if(max_score < enemyCount && enemyCount - max_score == 1) 
-                PlayerPrefs.SetInt("max_score", enemyCount);
+            int maxScore = PlayerPrefs.GetInt("maxScore");
+            if(maxScore < enemyCount) {
+                PlayerPrefs.SetInt("maxScore", enemyCount);
+                PlayerPrefs.Save();
+            }
             if(PlayerPrefs.GetInt("sound") == 1)
                 gameManager.player.GetComponent<Player>().audioSource.PlayOneShot(newLevelSound, 1.0f);
             levelText.text = enemyCount.ToString();

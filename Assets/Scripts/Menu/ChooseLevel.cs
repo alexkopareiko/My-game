@@ -14,22 +14,26 @@ public class ChooseLevel : MonoBehaviour
 
     void Start()
     {
-        sliderLevel.maxValue = PlayerPrefs.GetInt("max_score");
-        sliderLevel.value = PlayerPrefs.GetInt("max_score");
-        levelChoose.text = PlayerPrefs.GetInt("max_score").ToString();
+         if(!PlayerPrefs.HasKey("maxScore"))
+        {
+            PlayerPrefs.SetInt("maxScore", 0);
+        }
+        sliderLevel.maxValue = PlayerPrefs.GetInt("maxScore");
+        sliderLevel.value = PlayerPrefs.GetInt("maxScore");
+        levelChoose.text = PlayerPrefs.GetInt("maxScore").ToString();
     }
 
     public void OnValueChanged() {
-        int level = Mathf.Clamp(System.Int32.Parse(levelChoose.text), 1, PlayerPrefs.GetInt("max_score")) ;
-        
+        int level = Mathf.Clamp(System.Int32.Parse(levelChoose.text), 1, PlayerPrefs.GetInt("maxScore")) ;
     }
 
     public void OnDeselect() {
-        levelChoose.text = PlayerPrefs.GetInt("level_to_load").ToString();
+        levelChoose.text = PlayerPrefs.GetInt("levelToLoad").ToString();
     }
 
     public void OnSliderChanged(Slider slider) {
         levelChoose.text = slider.value.ToString();
-        PlayerPrefs.SetInt("level_to_load", (int)slider.value);
+        PlayerPrefs.SetInt("levelToLoad", (int)slider.value);
+        PlayerPrefs.Save();
     }
 }
